@@ -7,8 +7,65 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>SentinelPi</h1>
-    <p>Dashboard in costruzione...</p>
+    <header>
+        <h1>SentinelPi</h1>
+        <span id="state-badge" class="badge idle">Disattivo</span>
+    </header>
+
+    <main>
+        <section id="status-panel">
+            <div id="status-circle" class="idle"></div>
+            <p id="status-text">Disattivo</p>
+            <p id="challenge-timer" class="hidden"></p>
+        </section>
+
+        <section id="sensor-panel">
+            <div class="sensor-card" id="sensor-pir">
+                <h3>Movimento</h3>
+                <span class="sensor-indicator"></span>
+                <p class="last-trigger">—</p>
+            </div>
+            <div class="sensor-card" id="sensor-light">
+                <h3>Luce</h3>
+                <span class="sensor-indicator"></span>
+                <p class="last-trigger">—</p>
+            </div>
+            <div class="sensor-card" id="sensor-sound">
+                <h3>Suono</h3>
+                <span class="sensor-indicator"></span>
+                <p class="last-trigger">—</p>
+            </div>
+        </section>
+
+        <section id="event-log">
+            <h2>Eventi</h2>
+            <ul id="event-list"></ul>
+        </section>
+    </main>
+
+    <nav id="control-bar">
+        <button id="btn-arm" onclick="sendCommand('arm')">Arma</button>
+        <button id="btn-disarm" onclick="sendCommand('disarm')">Disarma</button>
+        <button id="btn-reset" onclick="sendCommand('reset')">Reset</button>
+        <button id="btn-settings" onclick="toggleSettings()">&#9881;</button>
+    </nav>
+
+    <div id="settings-modal" class="hidden">
+        <div class="modal-content">
+            <h2>Configurazione</h2>
+            <h3>Sensori</h3>
+            <label class="toggle-label"><input type="checkbox" id="cfg-pir" checked> Movimento (PIR)</label>
+            <label class="toggle-label"><input type="checkbox" id="cfg-light" checked> Luce</label>
+            <label class="toggle-label"><input type="checkbox" id="cfg-sound" checked> Suono</label>
+            <h3>Parametri</h3>
+            <label>Periodo di grazia (s): <input type="range" id="cfg-grace" min="1" max="10" value="3"><span id="cfg-grace-val">3</span></label>
+            <label>Timeout sfida (s): <input type="range" id="cfg-timeout" min="10" max="30" value="15"><span id="cfg-timeout-val">15</span></label>
+            <label>Difficolta: <input type="range" id="cfg-difficulty" min="1" max="5" value="1"><span id="cfg-difficulty-val">1</span></label>
+            <button onclick="saveSettings()">Salva</button>
+            <button onclick="toggleSettings()">Chiudi</button>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
