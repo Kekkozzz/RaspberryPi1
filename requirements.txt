@@ -1,0 +1,5 @@
+gpiozero
+lgpio
+flask
+flask-socketio
+pytest

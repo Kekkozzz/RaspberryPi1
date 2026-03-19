@@ -1,0 +1,33 @@
+{
+  "pins": {
+    "pir": 17,
+    "light": 27,
+    "sound": 22,
+    "led_red": 5,
+    "led_green": 6,
+    "led_blue": 13,
+    "buzzer": 19,
+    "button_a": 16,
+    "button_b": 26
+  },
+  "timing": {
+    "alert_grace_seconds": 3,
+    "challenge_timeout_seconds": 15,
+    "alarm_auto_reset_seconds": 0,
+    "disarmed_display_seconds": 3
+  },
+  "difficulty": {
+    "difficulty_level": 1,
+    "max_sequence_length": 8,
+    "button_rhythm_tolerance_ms": 200
+  },
+  "sensors": {
+    "pir_enabled": true,
+    "light_enabled": true,
+    "sound_enabled": true
+  },
+  "web": {
+    "host": "0.0.0.0",
+    "port": 5000
+  }
+}
